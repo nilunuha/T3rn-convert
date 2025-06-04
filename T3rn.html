@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kalkulator BRN ➡️ TRN</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f7f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
+
+    label {
+      display: block;
+      margin: 1rem 0 0.5rem;
+      color: #555;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.6rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    button {
+      margin-top: 1.5rem;
+      width: 100%;
+      background-color: #4CAF50;
+      color: white;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #output {
+      margin-top: 1.5rem;
+      background: #f1f1f1;
+      padding: 1rem;
+      border-radius: 8px;
+      color: #333;
+      white-space: pre-line;
+    }
+
+    @media (max-width: 500px) {
+      .container {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Kalkulator BRN ➡️ TRN</h2>
+    <label for="brn">Saldo BRN:</label>
+    <input id="brn" type="number" step="any" placeholder="Contoh: 12280" />
+
+    <label for="ratio">Rasio Biasa (misalnya 10):</label>
+    <input id="ratio" type="number" value="10" />
+
+    <label for="wratio">Rasio Whitelist (misalnya 5):</label>
+    <input id="wratio" type="number" value="5" />
+
+    <button onclick="hitung()">Hitung TRN</button>
+
+    <div id="output"></div>
+  </div>
+
+  <script>
+    function hitung() {
+      const brn = parseFloat(document.getElementById('brn').value);
+      const ratio = parseFloat(document.getElementById('ratio').value);
+      const wratio = parseFloat(document.getElementById('wratio').value);
+
+      if (brn > 0 && ratio > 0 && wratio > 0) {
+        const trnNormal = brn / ratio;
+        const trnWhitelist = brn / wratio;
+        document.getElementById('output').innerText = 
+          `Hasil Konversi:\n\n` +
+          `🔸 Rasio Biasa (${ratio}:1): ${trnNormal.toFixed(6)} TRN\n` +
+          `🔸 Rasio Whitelist (${wratio}:1): ${trnWhitelist.toFixed(6)} TRN`;
+      } else {
+        document.getElementById('output').innerText = "⚠️ Mohon isi semua kolom dengan benar.";
+      }
+    }
+  </script>
+</body>
+</html>
